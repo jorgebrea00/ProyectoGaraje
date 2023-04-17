@@ -22,7 +22,7 @@ import estructuraBaseDeDatos.Tabla;
 import mensajes.Mensajes;
 import menus.MenuLoginAltaCliente;
 
-
+///asdasdasdsa
 public class Principal {
 	
 
