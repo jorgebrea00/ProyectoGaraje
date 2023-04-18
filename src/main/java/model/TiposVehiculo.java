@@ -32,6 +32,10 @@ public class TiposVehiculo implements Serializable {
 	public TiposVehiculo() {
 	}
 
+	public TiposVehiculo(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return this.id;
 	}

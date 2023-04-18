@@ -8,6 +8,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +27,7 @@ import menus.MenuLoginAltaCliente;
 public class Principal {
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 	
 				// Conecta base datos
 		Connection conexionAbierta;
