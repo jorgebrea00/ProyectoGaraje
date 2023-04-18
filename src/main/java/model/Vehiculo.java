@@ -63,6 +63,14 @@ public class Vehiculo implements Serializable {
 	public Vehiculo() {
 	}
 
+	public Vehiculo(String matricula, String marca, String modelo, int año) {
+		super();
+		this.matricula = matricula;
+		this.marca=marca;
+		this.modelo=modelo;
+		this.año=año;
+	}
+
 	public int getId() {
 		return this.id;
 	}

@@ -1,6 +1,7 @@
 package menus;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ public class MenuLoginAltaCliente extends Menu {
 		super(estructuraTablas, conexionAbierta);	
 	}
 	
-	public void ejecutarMenuInicial() {
+	public void ejecutarMenuInicial() throws SQLException {
 		
 		Sesiones sesion=null;
 		int seleccionMenu;
@@ -48,7 +49,7 @@ public class MenuLoginAltaCliente extends Menu {
 		}while (seleccionMenu!=0);	
 	}
 	
-	public Sesiones accesoClientes(Sesiones sesion) {
+	public Sesiones accesoClientes(Sesiones sesion) throws SQLException {
 		Login login;
 		int numeroMaximoIntentos=3;
 		int numeroIntentos=0;
@@ -77,7 +78,7 @@ public class MenuLoginAltaCliente extends Menu {
 		return sesion;
 	}
 	
-	public Sesiones altaCliente(Sesiones sesion) {
+	public Sesiones altaCliente(Sesiones sesion) throws SQLException {
 		Login login;
 		login=altaNuevoCliente();
 		if (login!=null) {
