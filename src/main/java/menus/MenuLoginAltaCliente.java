@@ -64,8 +64,8 @@ public class MenuLoginAltaCliente extends Menu {
 						MenuAdministracion menuAdmin=new MenuAdministracion(getEstructuraTablas(), getConexionAbierta());
 						menuAdmin.ejecutaMenuAdministracion();
 					}else {
-						MenuCliente menuCliente=new MenuCliente(cliente, getEstructuraTablas(), getConexionAbierta());
-						menuCliente.ejecutaMenuCliente();
+						MenuAccesoCliente menuCliente=new MenuAccesoCliente(cliente, getEstructuraTablas(), getConexionAbierta());
+						menuCliente.ejecutaMenuAccesoCliente();
 					}
 				}
 				numeroIntentos=numeroMaximoIntentos+1;
@@ -89,7 +89,7 @@ public class MenuLoginAltaCliente extends Menu {
 				grabaPreferenciasCliente(preferenciasCliente);
 				
 				
-				MenuCliente menuCliente=new MenuCliente(cliente, getEstructuraTablas(), getConexionAbierta());
+				MenuVehiculoCliente menuCliente=new MenuVehiculoCliente(cliente, getEstructuraTablas(), getConexionAbierta());
 				menuCliente.ejecutaMenuCliente();						
 			}
 		}else {

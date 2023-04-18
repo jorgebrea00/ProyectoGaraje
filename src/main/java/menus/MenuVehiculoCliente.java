@@ -11,7 +11,7 @@ import estructuraBaseDeDatos.ImprimeTablas;
 import model.Cliente;
 import model.Vehiculo;
 
-public class MenuCliente extends Menu {
+public class MenuVehiculoCliente extends Menu {
 
 	Cliente cliente;
 	VehiculoDao vdao;
@@ -19,7 +19,7 @@ public class MenuCliente extends Menu {
 	ClienteDao cdao;
 	ImprimeTablas imprime;
 
-	public MenuCliente(Cliente cliente, EstructuraBbdd estructuraTablas, Connection conexionAbierta) {
+	public MenuVehiculoCliente(Cliente cliente, EstructuraBbdd estructuraTablas, Connection conexionAbierta) {
 		super(estructuraTablas, conexionAbierta);
 		this.cliente = cliente;
 		this.vdao = new VehiculoDao(estructuraTablas, conexionAbierta);
