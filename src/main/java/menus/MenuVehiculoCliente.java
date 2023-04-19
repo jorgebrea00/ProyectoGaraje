@@ -45,15 +45,23 @@ public class MenuVehiculoCliente extends Menu {
 
 	public void agregarVehiculo() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Introduce matrícula: ");
+
+		System.out.print("Introduce la matrícula: ");
 		String matricula = scanner.nextLine();
+		while (!(vdao.read(matricula, "matricula")).isEmpty()) {
+			System.out.println("Error, la matrícula ya exite en nuestro sistema.");
+			System.out.print("Introduce la matrícula: ");
+			matricula = scanner.nextLine();
+		}
+
 		System.out.print("Introduce tipo de vehículo (COCHE/MOTO/CAMIÓN/AUTOBÚS): ");
 		String tipo = scanner.nextLine().toUpperCase();
-		
-//		while (tipo != "COCHE" && tipo != "MOTO" && tipo != "CAMIÓN" && tipo != "AUTOBÚS") {
-//			System.out.print("Opción no válida, inténtalo de nuevo (COCHE/MOTO/CAMIÓN/AUTOBÚS): ");
-//			tipo = scanner.nextLine().toUpperCase();
-//		}
+
+		while (!tipo.equalsIgnoreCase("COCHE") && !tipo.equalsIgnoreCase("MOTO") && !tipo.equalsIgnoreCase("CAMIÓN")
+				&& !tipo.equalsIgnoreCase("AUTOBÚS")) {
+			System.out.print("Opción no válida, inténtalo de nuevo (COCHE/MOTO/CAMIÓN/AUTOBÚS): ");
+			tipo = scanner.nextLine().toUpperCase();
+		}
 
 		System.out.print("Introduce marca: ");
 		String marca = scanner.nextLine();
@@ -73,32 +81,6 @@ public class MenuVehiculoCliente extends Menu {
 		System.out.print("Introduce la matrícula del vehículo que quieres borrar:");
 		String matricula = scanner.nextLine();
 		vdao.delete(vdao.read(matricula, "matricula").get(0));
-	}
-
-	private void actualizarDatosPersonales() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Introduce nombre: ");
-		String nombre = scanner.nextLine();
-		System.out.print("Introduce primer apellido: ");
-		String ap1 = scanner.nextLine();
-		System.out.print("Introduce segundo apellido: ");
-		String ap2 = scanner.nextLine();
-		System.out.print("Introduce teléfono: ");
-		int telefono = scanner.nextInt();
-		cliente.setNombre(nombre);
-		cliente.setApellido1(ap1);
-		cliente.setApellido2(ap2);
-		cliente.setTelefono(telefono);
-		cdao.update(cliente);
-	}
-
-	private void solicitarCita() {
-	}
-
-	private void cancelarCita() {
-	}
-
-	private void bajaCliente() {
 	}
 
 }
