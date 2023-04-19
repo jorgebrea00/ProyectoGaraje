@@ -28,7 +28,7 @@ public class MenuAccesoCliente extends Menu {
 				ejecutaMenuDatosCliente();
 				break;
 			case 2: // "Mis vehículos"
-				ejecutaMenuVehiculoCliente();
+				ejecutaMenuVehiculosCliente();
 				break;
 			case 3: // "Mis citas"
 				break;
@@ -41,10 +41,10 @@ public class MenuAccesoCliente extends Menu {
 		menuModifica.ejecutaMenuDatosCliente();
 	}
 
-	public void ejecutaMenuVehiculoCliente() {
+	public void ejecutaMenuVehiculosCliente() {
 		MenuVehiculoCliente menuCliente = new MenuVehiculoCliente(cliente, getEstructuraTablas(), getConexionAbierta());
 		try {
-			menuCliente.ejecutaMenuCliente();
+			menuCliente.ejecutaMenuVehiculoCliente();
 		} catch (Exception e) {
 			System.out.println(Mensajes.NUMERO_OPCION_INEXISTENTE);
 		}

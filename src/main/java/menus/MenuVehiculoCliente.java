@@ -27,7 +27,7 @@ public class MenuVehiculoCliente extends Menu {
 		this.imprime = new estructuraBaseDeDatos.ImprimeTablas(conexionAbierta);
 	}
 
-	public void ejecutaMenuCliente() throws SQLException {
+	public void ejecutaMenuVehiculoCliente() throws SQLException {
 
 		// Mostrar vehiculos del cliente
 		imprime.selectFromTablaWhereCampoEqualsValor("vehiculos", "id_cliente", String.valueOf(cliente.getId()));
