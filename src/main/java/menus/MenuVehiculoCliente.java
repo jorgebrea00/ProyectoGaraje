@@ -27,52 +27,16 @@ public class MenuVehiculoCliente extends Menu {
 		this.imprime = new estructuraBaseDeDatos.ImprimeTablas(conexionAbierta);
 	}
 
-	public void ejecutaMenuCliente() throws SQLException {		
-		switch (new menus.MenuWu("Mis Vehículos", "Mis Citas", "Mis datos").ejecutar()) {
-		case "Mis Vehículos":			
-			imprime.selectFromTablaWhereCampoEqualsValor("vehiculos", "id_cliente",
-					String.valueOf(cliente.getId()));			
-			switch (new menus.MenuWu("Añadir", "Borrar").ejecutar()) {
-			case "Añadir":
-				agregarVehiculo();
-				break;
-			case "Borrar":
-				borrarVehiculo();
-				break;
-			case "Volver":
-				break;
-			}
+	public void ejecutaMenuCliente() throws SQLException {
+
+		// Mostrar vehiculos del cliente
+		imprime.selectFromTablaWhereCampoEqualsValor("vehiculos", "id_cliente", String.valueOf(cliente.getId()));
+		switch (new MenuWu("Añadir", "Borrar").ejecutar()) {
+		case "Añadir":
+			agregarVehiculo();
 			break;
-		case "Mis Citas":
-			// mostrar citas			
-			imprime.selectFromTablaWhereCampoEqualsValor("citas", "id_cliente",
-					String.valueOf(cliente.getId()));			
-			switch (new menus.MenuWu("Solicitar", "Cancelar").ejecutar()) {
-			case "Solicitar":
-				solicitarCita();
-				break;
-			case "Cancelar":
-				cancelarCita();
-				break;
-			case "Volver":
-				break;
-			}
-			break;
-		case "Mis Datos Personales":
-			// mostrar datos			
-			imprime.selectFromTablaWhereCampoEqualsValor("clientes", "id",
-					String.valueOf(cliente.getId())); 			
-			switch (new menus.MenuWu("Actualizar", "Baja cliente").ejecutar()) {
-			case "Actualizar":
-				actualizarDatosPersonales();
-				break;
-			case "Baja cliente":
-				bajaCliente();
-				System.exit(0);
-				break;
-			case "Volver":
-				break;
-			}
+		case "Borrar":
+			borrarVehiculo();
 			break;
 		case "Volver":
 			break;
@@ -85,6 +49,12 @@ public class MenuVehiculoCliente extends Menu {
 		String matricula = scanner.nextLine();
 		System.out.print("Introduce tipo de vehículo (COCHE/MOTO/CAMIÓN/AUTOBÚS): ");
 		String tipo = scanner.nextLine().toUpperCase();
+		
+//		while (tipo != "COCHE" && tipo != "MOTO" && tipo != "CAMIÓN" && tipo != "AUTOBÚS") {
+//			System.out.print("Opción no válida, inténtalo de nuevo (COCHE/MOTO/CAMIÓN/AUTOBÚS): ");
+//			tipo = scanner.nextLine().toUpperCase();
+//		}
+
 		System.out.print("Introduce marca: ");
 		String marca = scanner.nextLine();
 		System.out.print("Introduce modelo: ");

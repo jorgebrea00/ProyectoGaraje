@@ -27,7 +27,7 @@ import menus.MenuLoginAltaCliente;
 public class Principal {
 	
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) {
 	
 				// Conecta base datos
 		Connection conexionAbierta;
@@ -39,7 +39,12 @@ public class Principal {
 			estructuraBD=tablaDao.cargaEstructuraTablas();
 			
 			MenuLoginAltaCliente menuInicial=new MenuLoginAltaCliente(estructuraBD, conexionAbierta);
-			menuInicial.ejecutarMenuInicial();
+			try {
+				menuInicial.ejecutarMenuInicial();
+			} catch (SQLException e) {
+				System.out.println("Error al ejecutarMenuInicial");
+				e.printStackTrace();
+			}
 			
 			Conexion.desconectarBBDD(conexionAbierta);
 		}
