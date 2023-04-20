@@ -237,12 +237,12 @@ public abstract class Menu{
 		 muestraTituloCentrado("Preferencias de atención");
 		 PreferenciasCliente preferenciasCliente=new PreferenciasCliente();
 		 do {
-			 diaSemana=Principal.introduceAtributoPorTeclado("el día de la semana que desea ser atendido ("+Mensajes.DIAS_SEMANA+")",PreferenciasCliente.class, "diaSemana", getEstructuraTablas()).toUpperCase();
+			 diaSemana=Principal.introduceAtributoPorTeclado("el día de la semana que desea ser atendido "+Mensajes.DIAS_SEMANA,PreferenciasCliente.class, "diaSemana", getEstructuraTablas()).toUpperCase();
 			 if(Mensajes.DIAS_SEMANA.contains(diaSemana)) entradaValidada=true; else System.out.println(Mensajes.DATO_INTRODUCIDO_ERRONEO);
 		 } while(!entradaValidada);
 		 entradaValidada=false;
 		 do {
-			 turno=Principal.introduceAtributoPorTeclado("el turno en que desea ser atendido ("+Mensajes.TURNOS+")",PreferenciasCliente.class, "turno", getEstructuraTablas()).toUpperCase();
+			 turno=Principal.introduceAtributoPorTeclado("el turno en que desea ser atendido "+Mensajes.TURNOS,PreferenciasCliente.class, "turno", getEstructuraTablas()).toUpperCase();
 			 if(Mensajes.TURNOS.contains(turno)) entradaValidada=true; else System.out.println(Mensajes.DATO_INTRODUCIDO_ERRONEO);
 		 }while(!entradaValidada);
 		 preferenciasCliente.setDiaSemana(diaSemana);

@@ -1,28 +1,18 @@
 package dao;
 
 import interfaces.Dao;
-import main.Conexion;
+
 import mensajes.Mensajes;
-import model.Login;
-import model.Sesiones;
 import model.TiposVehiculo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-//import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import com.mysql.cj.Query;
-
-import estructuraBaseDeDatos.Campo;
 import estructuraBaseDeDatos.EstructuraBbdd;
 import estructuraBaseDeDatos.Tabla;
 
@@ -105,7 +95,7 @@ private String tabla="tipos_vehiculos";
 	@Override
 	public List<TiposVehiculo> getAll() {
 		List <TiposVehiculo> listaResultado=new ArrayList<>();
-		String ordenarPor="email";
+		String ordenarPor="tipo";
 		String ordenSql="select * from "+tabla+" order by "+ordenarPor+" asc";
 		try(Statement stm=getConexionAbierta().createStatement();
 				ResultSet rs=stm.executeQuery(ordenSql)){	

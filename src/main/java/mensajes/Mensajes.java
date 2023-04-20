@@ -1,5 +1,7 @@
 package mensajes;
 
+import java.util.Arrays;
+import java.util.List;
 
 public class Mensajes {
 	public static final String SALTOLINEA="\n";
@@ -39,11 +41,13 @@ public class Mensajes {
 	public static final String REGISTRO_BORRADO_OK="Registro borrado correctamente."+SALTOLINEA;
 	public static final String REGISTRO_NO_EXISTE_EN_BD="Atención! El registro no existe en la base de datos."+SALTOLINEA;
 	public static final String REGISTRO_YA_EXISTE_EN_BD="Atención! El registro ya existe en la base de datos."+SALTOLINEA;
+	public static final String TIPO_VEHICULO_NO_EXISTE="Atención! El tipo de vehículo no existe en la base de datos."+SALTOLINEA;;
 	
-//	public static final List<String> DIAS_SEMANA=Arrays.asList("LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES");
-//	public static final List<String> TURNOS=Arrays.asList("MAÑANA", "TARDE");
-	public static final String DIAS_SEMANA="LUNES MARTES MIÉRCOLES JUEVES VIERNES";
-	public static final String TURNOS="MAÑANA TARDE";
+	public static final List<String> DIAS_SEMANA=Arrays.asList("LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES");
+	public static final List<String> TURNOS=Arrays.asList("MAÑANA", "TARDE");
+	public static final List<String> SECCIONES_DEL_TALLER=Arrays.asList("CHAPA", "PINTURA", "MECÁNICA", "ELECTRICIDAD", "TAPICERÍA");
+
+
 
 	
 	

@@ -32,6 +32,7 @@ public class MenuAdministracion extends Menu {
 					break;
 				
 				case 4:						// "Taller"
+					abreMenuAdministracionTaller();
 					break;	
 				
 				}
@@ -52,6 +53,12 @@ public class MenuAdministracion extends Menu {
 	public void abreMenuAdministracionGeneral() {
 		MenuAdministracionGeneral menuAdmin=new MenuAdministracionGeneral(getEstructuraTablas(), getConexionAbierta());
 		menuAdmin.ejecutaMenuAdministracionGeneral();		
+	}
+	
+	public void abreMenuAdministracionTaller() {
+		MenuAdministracionTaller menuTaller=new MenuAdministracionTaller(getEstructuraTablas(), getConexionAbierta());
+		menuTaller.ejecutaMenuAdministracionTaller();
+		
 	}
 
 }
