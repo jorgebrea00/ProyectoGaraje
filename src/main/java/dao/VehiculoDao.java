@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import estructuraBaseDeDatos.Campo;
+
 import estructuraBaseDeDatos.EstructuraBbdd;
 import estructuraBaseDeDatos.Tabla;
 import interfaces.Dao;
-import main.Conexion;
+
 import mensajes.Mensajes;
-import model.Cliente;
-import model.Login;
-import model.TiposVehiculo;
+
 import model.Vehiculo;
 
 public class VehiculoDao extends DaoPrincipal implements Dao<Vehiculo> {

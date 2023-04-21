@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +14,7 @@ import estructuraBaseDeDatos.EstructuraBbdd;
 import estructuraBaseDeDatos.Tabla;
 import interfaces.Dao;
 import mensajes.Mensajes;
-import model.Cliente;
-import model.InventariosPieza;
-import model.Sesiones;
+
 import model.TarifasManoObra;
 import model.TiposVehiculo;
 

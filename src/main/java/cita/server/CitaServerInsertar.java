@@ -7,31 +7,44 @@ import java.util.Scanner;
 
 import cita.calendario.SaberSiExisteUnaCita;
 import dao.VehiculoDao;
+
 import main.Conexion;
+
 import model.Cliente;
 import model.Vehiculo;
 
-
-
 public class CitaServerInsertar {
-	
+
 	static Scanner sc = new Scanner(System.in);
 
-	public  Vehiculo PedirVehiculo(Cliente cliente) {
-		
-		 @SuppressWarnings("resource")
+	public Vehiculo PedirVehiculo(Cliente cliente) {
+
+		@SuppressWarnings("resource")
 		Scanner sca = new Scanner(System.in);
 
-		int valorBusqueda=0;
+		int valorBusqueda = 0;
 
 		boolean salir = false;
 
-		VehiculoDao vehiculoDao = new VehiculoDao(null,Conexion.conexionMySQL());
+		VehiculoDao vehiculoDao = new VehiculoDao(null, Conexion.conexionMySQL());
 
 		String id_cliente = String.valueOf(cliente.getId());
 
-		List<Vehiculo> arrayListVehiculo = vehiculoDao.read(id_cliente,"id_cliente");
-		
+		List<Vehiculo> arrayListVehiculo = vehiculoDao.read(id_cliente, "id_cliente");
+
+		// esto es si el cliente no tiene vehiculos le crea uno 
+		// no funciona por que le tengo que pasar al contructor una EstructuraBbdd que no tengo
+	/*	if (arrayListVehiculo.isEmpty()) {
+			
+			EstructuraBbdd estructuraBbdd = new EstructuraBbdd();
+			
+
+			MenuVehiculoCliente menuVehiculoCliente = new MenuVehiculoCliente(cliente, estructuraBbdd, Conexion.conexionMySQL());
+
+			menuVehiculoCliente.agregarVehiculo();
+			arrayListVehiculo = vehiculoDao.read(id_cliente, "id_cliente");
+
+		}*/
 
 		while (salir != true) {
 
@@ -45,24 +58,24 @@ public class CitaServerInsertar {
 				System.out.println(arrayListVehiculo.indexOf(vehiculo));
 
 			}
-			
 
-			 valorBusqueda = sca.nextInt();
+			valorBusqueda = sca.nextInt();
 
-			if (valorBusqueda >= 0 && valorBusqueda < arrayListVehiculo.size() && arrayListVehiculo.get(valorBusqueda) != null) {
+			if (valorBusqueda >= 0 && valorBusqueda < arrayListVehiculo.size()
+					&& arrayListVehiculo.get(valorBusqueda) != null) {
 				salir = true;
 			} else
 				System.out.println("eliga un vehiculo correcto");
 
 		}
-		
+
 		System.out.println(arrayListVehiculo.get(valorBusqueda).getMatricula());
 
 		return arrayListVehiculo.get(valorBusqueda);
 
 	}
 
-	public  LocalDate Pedirfecha() {
+	public LocalDate Pedirfecha() {
 
 		LocalDate localDataInsertarFechaAuto = LocalDate.now();
 		LocalDate localDataInsertarFechaAuto2 = LocalDate.now();

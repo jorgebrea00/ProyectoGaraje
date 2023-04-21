@@ -1,3 +1,4 @@
+
 package cita;
 
 import java.util.Scanner;
@@ -8,8 +9,26 @@ import model.CabecerasDiagnostico;
 import model.Cliente;
 
 public class MenuCita {
+	
+	Cliente cliente;
+	CabecerasDiagnostico cabecerasDiagnostico;
+	
+	public MenuCita() {
+		super();
+	}
 
-	public static void darMenu() {
+	public MenuCita(Cliente cliente, CabecerasDiagnostico cabecerasDiagnostico) {
+		super();
+		this.cliente = cliente;
+		this.cabecerasDiagnostico = cabecerasDiagnostico;
+	}
+
+	public MenuCita(Cliente cliente) {
+		super();
+		this.cliente = cliente;
+	}
+
+	public  void darMenu() {
 
 		System.out.println(Mensajes.CITA_WELCOME);
 
@@ -22,7 +41,7 @@ public class MenuCita {
 		}
 	}
 
-	public static boolean pedirOpcion() {
+	public  boolean pedirOpcion() {
 		
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
@@ -36,11 +55,11 @@ public class MenuCita {
 		
 		switch (opcion) {
 		case 1: {
-			Cliente cliente = new Cliente();
-			cliente.setId(2);
+			//Cliente cliente = new Cliente();
+			//cliente.setId(2);
 			CabecerasDiagnostico cabecerasDiagnostico = new CabecerasDiagnostico();
 			
-			CitaServer.insertarCitaServer(cliente, cabecerasDiagnostico);
+			CitaServer.insertarCitaServer(this.cliente, cabecerasDiagnostico);
 			
 			return false;
 		}

@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.IvaDao;
+
 import dao.TarifasManoObraDao;
 import dao.TiposVehiculoDao;
 import estructuraBaseDeDatos.EstructuraBbdd;
 import main.ListadoEntity;
 import main.Principal;
 import mensajes.Mensajes;
-import model.Iva;
+
 import model.TarifasManoObra;
 import model.TiposVehiculo;
 

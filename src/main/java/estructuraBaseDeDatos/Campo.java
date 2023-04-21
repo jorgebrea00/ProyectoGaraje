@@ -1,9 +1,6 @@
 package estructuraBaseDeDatos;
 
-import java.lang.reflect.Field;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
 
 public class Campo extends Tabla {
 	private String nombre;

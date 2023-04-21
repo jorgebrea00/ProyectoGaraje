@@ -14,7 +14,7 @@ import estructuraBaseDeDatos.Tabla;
 import interfaces.Dao;
 import mensajes.Mensajes;
 import model.TotalesDiagnostico;
-import model.CabecerasDiagnostico;
+
 
 public class TotalesDiagnosticoDao extends DaoPrincipal implements Dao<TotalesDiagnostico> {
 	private String tabla = "totales_diagnosticos";

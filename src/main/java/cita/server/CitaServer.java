@@ -18,6 +18,7 @@ public class CitaServer {
 		
 CitaServerInsertar citaServerInsertar = new CitaServerInsertar();
 
+
 		Vehiculo vehiculoCliente = citaServerInsertar.PedirVehiculo(cliente);
 		System.out.println(vehiculoCliente.getId());
 		CabecerasDiagnostico.setId(1);
@@ -32,6 +33,8 @@ CitaServerInsertar citaServerInsertar = new CitaServerInsertar();
 		cita.setCliente(cliente);
 		cita.setVehiculo(vehiculoCliente);
 
+		
+		
 		CitaDao.insert(cita);
 		System.out.println(" ");
 

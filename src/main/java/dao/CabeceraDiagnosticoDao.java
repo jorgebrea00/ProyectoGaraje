@@ -11,15 +11,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.JoinColumn;
 
 import estructuraBaseDeDatos.EstructuraBbdd;
 import estructuraBaseDeDatos.Tabla;
 import interfaces.Dao;
 import mensajes.Mensajes;
 import model.CabecerasDiagnostico;
-import model.Login;
-import model.Sesiones;
+
 import model.Vehiculo;
 
 public class CabeceraDiagnosticoDao extends DaoPrincipal implements Dao<CabecerasDiagnostico> {
