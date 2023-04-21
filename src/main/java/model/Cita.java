@@ -1,8 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import javax.persistence.*;
-import java.util.Date;
 
 
 /**
@@ -19,9 +20,9 @@ public class Cita implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="fecha_hora")
-	private Date fechaHora;
+	private LocalDate fechaHora;
 
 	//bi-directional many-to-one association to CabecerasDiagnostico
 	@ManyToOne
@@ -49,11 +50,11 @@ public class Cita implements Serializable {
 		this.id = id;
 	}
 
-	public Date getFechaHora() {
+	public LocalDate getFechaHora() {
 		return this.fechaHora;
 	}
 
-	public void setFechaHora(Date fechaHora) {
+	public void setFechaHora(LocalDate fechaHora) {
 		this.fechaHora = fechaHora;
 	}
 

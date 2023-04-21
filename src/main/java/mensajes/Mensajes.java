@@ -45,6 +45,20 @@ public class Mensajes {
 	public static final String DIAS_SEMANA="LUNES MARTES MIÉRCOLES JUEVES VIERNES";
 	public static final String TURNOS="MAÑANA TARDE";
 
+// mensajes cita
+	public static final String CITA_WELCOME="Bienvenido al menu de citas";
+
+	public static final String CITA_OPCIONES= 
+	        "aqui puede"
+			+ " 1.- Crear una cita"
+			+ " 2.- Ver sus citas "
+			+ " 3.- Modificar una cita"
+			+ " 4.- Cancelar una cita"
+			+ " 5.- Salir";
+	
+	public static final String CITA_OPCION_VALOR_INCORRECTO =  "Escoga una opcion valida"; 
+	
+	public static final String CITA_DESPEDIDA = "***********************";
 	
 	
 	
