@@ -2,7 +2,10 @@ package menus;
 
 import java.sql.Connection;
 
+<<<<<<< HEAD
 import cita.MenuCita;
+=======
+>>>>>>> eb016fbe99444c8b38b894266884b510d30d4717
 import estructuraBaseDeDatos.EstructuraBbdd;
 import mensajes.Mensajes;
 import model.Cliente;
@@ -32,7 +35,10 @@ public class MenuAccesoCliente extends Menu {
 				ejecutaMenuVehiculosCliente();
 				break;
 			case 3: // "Mis citas"
+<<<<<<< HEAD
 				MenuCita.darMenu();
+=======
+>>>>>>> eb016fbe99444c8b38b894266884b510d30d4717
 				break;
 			}
 		} while (seleccionMenu != 0);
@@ -46,7 +52,11 @@ public class MenuAccesoCliente extends Menu {
 	public void ejecutaMenuVehiculosCliente() {
 		MenuVehiculoCliente menuCliente = new MenuVehiculoCliente(cliente, getEstructuraTablas(), getConexionAbierta());
 		try {
+<<<<<<< HEAD
 			menuCliente.ejecutaMenuCliente();
+=======
+			menuCliente.ejecutaMenuVehiculoCliente();
+>>>>>>> eb016fbe99444c8b38b894266884b510d30d4717
 		} catch (Exception e) {
 			System.out.println(Mensajes.NUMERO_OPCION_INEXISTENTE);
 		}

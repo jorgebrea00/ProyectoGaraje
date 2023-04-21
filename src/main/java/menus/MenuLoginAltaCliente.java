@@ -87,10 +87,8 @@ public class MenuLoginAltaCliente extends Menu {
 			if (cliente!=null) {
 				PreferenciasCliente preferenciasCliente=introducePreferenciasCliente(cliente);
 				grabaPreferenciasCliente(preferenciasCliente);
-				
-				
-				MenuVehiculoCliente menuCliente=new MenuVehiculoCliente(cliente, getEstructuraTablas(), getConexionAbierta());
-				menuCliente.ejecutaMenuCliente();						
+				MenuAccesoCliente menuCliente=new MenuAccesoCliente(cliente, getEstructuraTablas(), getConexionAbierta());
+				menuCliente.ejecutaMenuAccesoCliente();						
 			}
 		}else {
 			sesion=null;

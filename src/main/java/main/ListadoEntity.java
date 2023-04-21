@@ -305,13 +305,15 @@ public class ListadoEntity {
 		String linea=LINEA_VERTICAL;
 		int ancho;
 		int x=0;
-
+		int y=0;
+		
 		for (Campo campo: campos) {
 			if(visible[x])  {
 				if (campo.getTipo().equals("varchar")) ancho=campo.getLongitud(); else ancho=NUMERO_DIGITOS_CAMPO_NUMERICO;
-				String valorAtributo=valoresAtributos[x];
+				String valorAtributo=valoresAtributos[y];
 				if (valorAtributo.length()>ancho) valorAtributo=valorAtributo.substring(0, ancho-1);
 				linea+=String.format("%-"+ancho+"s%s",valorAtributo,LINEA_VERTICAL);
+				y++;
 			}
 			x++;
 		}

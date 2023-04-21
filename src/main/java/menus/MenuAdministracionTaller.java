@@ -16,13 +16,15 @@ public class MenuAdministracionTaller extends Menu{
 		
 		do {
 			System.out.println(Mensajes.SALTOLINEA);
-			seleccionMenu=opcionSeleccionadaDelMenu(cadenaMenu("Menú de Taller",new String[] {"Volver","Piezas"}));
+			seleccionMenu=opcionSeleccionadaDelMenu(cadenaMenu("Menú de Taller",new String[] {"Volver","Piezas", "Tarifa mano de obra"}));
 			switch (seleccionMenu) {
 				case 0:						// Volver
 					break;
 				case 1:						// "Piezas"
 					abreMenuTallerInvntarioPiezas();
-					break;				
+					break;	
+				case 2:
+					abreMenuAdministracionTarifasManoObra();
 				}
 		}while (seleccionMenu!=0);	
 	}
@@ -30,6 +32,11 @@ public class MenuAdministracionTaller extends Menu{
 	public void abreMenuTallerInvntarioPiezas() {
 		MenuTallerInventarioPiezas menuTaller=new MenuTallerInventarioPiezas(getEstructuraTablas(), getConexionAbierta());
 		menuTaller.ejecutaMenuTallerInventarioPiezas();
+	}
+	
+	public void abreMenuAdministracionTarifasManoObra() {
+		MenuAdministracionTarifasManoObra menuManoObra=new MenuAdministracionTarifasManoObra(getEstructuraTablas(), getConexionAbierta());
+		menuManoObra.ejecutaMenuAdministracionTarifasManoObra();
 	}
 
 }

@@ -27,52 +27,16 @@ public class MenuVehiculoCliente extends Menu {
 		this.imprime = new estructuraBaseDeDatos.ImprimeTablas(conexionAbierta);
 	}
 
-	public void ejecutaMenuCliente() throws SQLException {		
-		switch (new menus.MenuWu("Mis Vehículos", "Mis Citas", "Mis datos").ejecutar()) {
-		case "Mis Vehículos":			
-			imprime.selectFromTablaWhereCampoEqualsValor("vehiculos", "id_cliente",
-					String.valueOf(cliente.getId()));			
-			switch (new menus.MenuWu("Añadir", "Borrar").ejecutar()) {
-			case "Añadir":
-				agregarVehiculo();
-				break;
-			case "Borrar":
-				borrarVehiculo();
-				break;
-			case "Volver":
-				break;
-			}
+	public void ejecutaMenuVehiculoCliente() throws SQLException {
+
+		// Mostrar vehiculos del cliente
+		imprime.selectFromTablaWhereCampoEqualsValor("vehiculos", "id_cliente", String.valueOf(cliente.getId()));
+		switch (new MenuWu("Añadir", "Borrar").ejecutar()) {
+		case "Añadir":
+			agregarVehiculo();
 			break;
-		case "Mis Citas":
-			// mostrar citas			
-			imprime.selectFromTablaWhereCampoEqualsValor("citas", "id_cliente",
-					String.valueOf(cliente.getId()));			
-			switch (new menus.MenuWu("Solicitar", "Cancelar").ejecutar()) {
-			case "Solicitar":
-				solicitarCita();
-				break;
-			case "Cancelar":
-				cancelarCita();
-				break;
-			case "Volver":
-				break;
-			}
-			break;
-		case "Mis Datos Personales":
-			// mostrar datos			
-			imprime.selectFromTablaWhereCampoEqualsValor("clientes", "id",
-					String.valueOf(cliente.getId())); 			
-			switch (new menus.MenuWu("Actualizar", "Baja cliente").ejecutar()) {
-			case "Actualizar":
-				actualizarDatosPersonales();
-				break;
-			case "Baja cliente":
-				bajaCliente();
-				System.exit(0);
-				break;
-			case "Volver":
-				break;
-			}
+		case "Borrar":
+			borrarVehiculo();
 			break;
 		case "Volver":
 			break;
@@ -81,10 +45,24 @@ public class MenuVehiculoCliente extends Menu {
 
 	public void agregarVehiculo() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Introduce matrícula: ");
+
+		System.out.print("Introduce la matrícula: ");
 		String matricula = scanner.nextLine();
+		while (!(vdao.read(matricula, "matricula")).isEmpty()) {
+			System.out.println("Error, la matrícula ya exite en nuestro sistema.");
+			System.out.print("Introduce la matrícula: ");
+			matricula = scanner.nextLine();
+		}
+
 		System.out.print("Introduce tipo de vehículo (COCHE/MOTO/CAMIÓN/AUTOBÚS): ");
 		String tipo = scanner.nextLine().toUpperCase();
+
+		while (!tipo.equalsIgnoreCase("COCHE") && !tipo.equalsIgnoreCase("MOTO") && !tipo.equalsIgnoreCase("CAMIÓN")
+				&& !tipo.equalsIgnoreCase("AUTOBÚS")) {
+			System.out.print("Opción no válida, inténtalo de nuevo (COCHE/MOTO/CAMIÓN/AUTOBÚS): ");
+			tipo = scanner.nextLine().toUpperCase();
+		}
+
 		System.out.print("Introduce marca: ");
 		String marca = scanner.nextLine();
 		System.out.print("Introduce modelo: ");
@@ -103,32 +81,6 @@ public class MenuVehiculoCliente extends Menu {
 		System.out.print("Introduce la matrícula del vehículo que quieres borrar:");
 		String matricula = scanner.nextLine();
 		vdao.delete(vdao.read(matricula, "matricula").get(0));
-	}
-
-	private void actualizarDatosPersonales() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Introduce nombre: ");
-		String nombre = scanner.nextLine();
-		System.out.print("Introduce primer apellido: ");
-		String ap1 = scanner.nextLine();
-		System.out.print("Introduce segundo apellido: ");
-		String ap2 = scanner.nextLine();
-		System.out.print("Introduce teléfono: ");
-		int telefono = scanner.nextInt();
-		cliente.setNombre(nombre);
-		cliente.setApellido1(ap1);
-		cliente.setApellido2(ap2);
-		cliente.setTelefono(telefono);
-		cdao.update(cliente);
-	}
-
-	private void solicitarCita() {
-	}
-
-	private void cancelarCita() {
-	}
-
-	private void bajaCliente() {
 	}
 
 }
