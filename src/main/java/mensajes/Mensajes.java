@@ -54,11 +54,11 @@ public class Mensajes {
 
 	public static final String CITA_OPCIONES= 
 	        "aqui puede"
-			+ " 1.- Crear una cita"
-			+ " 2.- Ver sus citas "
-			+ " 3.- Modificar una cita"
-			+ " 4.- Cancelar una cita"
-			+ " 5.- Salir";
+			+ " 1.- Crear una cita  "
+			+ " 2.- Ver sus citas  "
+			+ " 3.- Modificar una cita  "
+			+ " 4.- Cancelar una cita  "
+			+ " 5.- Salir  ";
 	
 	public static final String CITA_OPCION_VALOR_INCORRECTO =  "Escoga una opcion valida"; 
 	

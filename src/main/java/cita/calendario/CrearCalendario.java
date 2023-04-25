@@ -4,15 +4,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class CrearCalendario {
-	
-	
+
 	public static void printCalendario() {
-	
+
 		System.out.println(" ");
 		System.out.println("La disponibilidad de nuestro calendario es esta");
 		System.out.println("Los que estan en XX no estan disponibles");
 		System.out.println(" ");
-		
+
 		LocalDate localDateAhora = LocalDate.now();
 		LocalDate ld = LocalDate.of(localDateAhora.getYear(), localDateAhora.getMonthValue(), 1);
 		int vueltas = 1;
@@ -46,7 +45,7 @@ public class CrearCalendario {
 						if (SaberSiExisteUnaCita.evaluarSiExiste(ld, dias)) {
 							System.out.print("| XX |");
 							dias++;
-						}else if (vueltas==1 && dias < localDateAhora.getDayOfMonth() ) {
+						} else if (vueltas == 1 && dias < localDateAhora.getDayOfMonth()) {
 							System.out.print("| XX |");
 							dias++;
 						} else {
@@ -63,5 +62,4 @@ public class CrearCalendario {
 
 	}
 
-	
 }

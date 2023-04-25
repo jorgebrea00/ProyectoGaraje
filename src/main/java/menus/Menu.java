@@ -14,7 +14,7 @@ import model.Login;
 import model.PreferenciasCliente;
 
 public abstract class Menu{
-	private EstructuraBbdd estructuraTablas;
+	private static EstructuraBbdd estructuraTablas;
 	private Connection conexionAbierta;
 
 	public Menu(EstructuraBbdd estructuraTablas, Connection conexionAbierta) {
@@ -27,7 +27,7 @@ public abstract class Menu{
 		super();
 	}
 	
-	public EstructuraBbdd getEstructuraTablas() {
+	public static EstructuraBbdd getEstructuraTablas() {
 		return estructuraTablas;
 	}
 

@@ -9,10 +9,10 @@ import model.CabecerasDiagnostico;
 import model.Cliente;
 
 public class MenuCita {
-	
+
 	Cliente cliente;
 	CabecerasDiagnostico cabecerasDiagnostico;
-	
+
 	public MenuCita() {
 		super();
 	}
@@ -28,7 +28,7 @@ public class MenuCita {
 		this.cliente = cliente;
 	}
 
-	public  void darMenu() {
+	public void darMenu() {
 
 		System.out.println(Mensajes.CITA_WELCOME);
 
@@ -41,8 +41,8 @@ public class MenuCita {
 		}
 	}
 
-	public  boolean pedirOpcion() {
-		
+	public boolean pedirOpcion() {
+
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 
@@ -51,42 +51,39 @@ public class MenuCita {
 		System.out.println(Mensajes.CITA_OPCIONES);
 		opcion = sc.nextInt();
 
-	
-		
 		switch (opcion) {
 		case 1: {
-			//Cliente cliente = new Cliente();
-			//cliente.setId(2);
+			// falta metodo para extraer cabeceradiagnostico
 			CabecerasDiagnostico cabecerasDiagnostico = new CabecerasDiagnostico();
-			
+
 			CitaServer.insertarCitaServer(this.cliente, cabecerasDiagnostico);
-			
+
 			return false;
 		}
 		case 2: {
 
+			CitaServer.mostrarCitaCliente(this.cliente);
 			return false;
 		}
 		case 3: {
-
+			CitaServer.modificarCita(cliente);
 			return false;
 		}
 		case 4: {
-			
-			
+
+			CitaServer.borrarCitaCliente(cliente);
 			return false;
 		}
 		case 5: {
 			System.out.println(Mensajes.CITA_DESPEDIDA);
-			return true;	
-			
+			return true;
+
 		}
 		default:
 			System.out.println(Mensajes.CITA_OPCION_VALOR_INCORRECTO);
-			return	false;
+			return false;
 		}
 
 	}
-	
 
 }

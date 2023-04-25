@@ -32,19 +32,23 @@ public class CitaServerInsertar {
 
 		List<Vehiculo> arrayListVehiculo = vehiculoDao.read(id_cliente, "id_cliente");
 
-		// esto es si el cliente no tiene vehiculos le crea uno 
-		// no funciona por que le tengo que pasar al contructor una EstructuraBbdd que no tengo
-	/*	if (arrayListVehiculo.isEmpty()) {
-			
-			EstructuraBbdd estructuraBbdd = new EstructuraBbdd();
-			
-
-			MenuVehiculoCliente menuVehiculoCliente = new MenuVehiculoCliente(cliente, estructuraBbdd, Conexion.conexionMySQL());
-
-			menuVehiculoCliente.agregarVehiculo();
-			arrayListVehiculo = vehiculoDao.read(id_cliente, "id_cliente");
-
-		}*/
+		// esto es si el cliente no tiene vehiculos le crea uno
+		// no funciona por que le tengo que pasar al contructor una EstructuraBbdd que
+		// no tengo
+		/*
+		 * if (arrayListVehiculo.isEmpty()) {
+		 * 
+		 * EstructuraBbdd estructuraBbdd = new EstructuraBbdd();
+		 * 
+		 * 
+		 * MenuVehiculoCliente menuVehiculoCliente = new MenuVehiculoCliente(cliente,
+		 * estructuraBbdd, Conexion.conexionMySQL());
+		 * 
+		 * menuVehiculoCliente.agregarVehiculo(); arrayListVehiculo =
+		 * vehiculoDao.read(id_cliente, "id_cliente");
+		 * 
+		 * }
+		 */
 
 		while (salir != true) {
 
