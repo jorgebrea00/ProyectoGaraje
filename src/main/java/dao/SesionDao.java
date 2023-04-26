@@ -50,7 +50,7 @@ public class SesionDao implements Dao<Sesion> {
 				LocalDateTime inicioSesion = resultSet.getObject("inicio_sesion", LocalDateTime.class);
 				LocalDateTime finSesion = resultSet.getObject("fin_sesion", LocalDateTime.class);
 				int idCliente = resultSet.getInt("id_cliente");
-				return new Sesion(sesionId, idCliente);
+				return new Sesion(sesionId, inicioSesion, finSesion, idCliente);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class SesionDao implements Dao<Sesion> {
 				LocalDateTime inicioSesion = resultSet.getObject("inicio_sesion", LocalDateTime.class);
 				LocalDateTime finSesion = resultSet.getObject("fin_sesion", LocalDateTime.class);
 				int idCliente = resultSet.getInt("id_cliente");
-				sesiones.add(new Sesion(sesionId, idCliente));
+				sesiones.add(new Sesion(sesionId, inicioSesion, finSesion, idCliente));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

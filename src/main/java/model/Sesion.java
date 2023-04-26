@@ -8,13 +8,20 @@ public class Sesion {
     private LocalDateTime finSesion;
     private int idCliente;
 
-    public Sesion(int id, int idCliente) {
-        this.id = id;
-        this.inicioSesion = LocalDateTime.now();
-        this.idCliente = idCliente;
-    }
 
-    public int getId() {
+    public Sesion() {
+		super();
+	}
+
+	public Sesion(int id, LocalDateTime inicioSesion, LocalDateTime finSesion, int idCliente) {
+		super();
+		this.id = id;
+		this.inicioSesion = inicioSesion;
+		this.finSesion = finSesion;
+		this.idCliente = idCliente;
+	}
+
+	public int getId() {
         return id;
     }
 

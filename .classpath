@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry excluding="util/Validacion2.java" kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -21,8 +21,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/workspace/Motoracing/lib/javax.persistence_2.2.1.v201807122140.jar"/>
-	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/workspace/Motoracing/lib/javax.persistence-api-2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/workspace/Motoracing/lib/mysql-connector-j-8.0.31.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE2/Lib/javax.persistence_2.2.1.v201807122140.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE2/Lib/javax.persistence-api-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE2/Lib/mysql-connector-j-8.0.31.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

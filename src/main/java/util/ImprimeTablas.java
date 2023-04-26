@@ -5,12 +5,14 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import model.Cliente;
+
 public class ImprimeTablas {
 	
 	public Connection con = Multidao.getCon();
 
 	public void selectFromTablaWhereCampoEqualsValor(String nombreTabla, String campoBusqueda,
-			String valorCampo) throws SQLException {
+			String valorCampo) {
 
 		String query = String.format("SELECT * FROM %s WHERE %s = %s", nombreTabla, campoBusqueda, valorCampo);
 		try (Statement statement = con.createStatement(); ResultSet rs = statement.executeQuery(query)) {
@@ -44,10 +46,12 @@ public class ImprimeTablas {
 				}
 				System.out.println("|");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void selectFromTabla(String nombreTabla) throws SQLException {
+	public void selectFromTabla(String nombreTabla){
 		String query = String.format("SELECT * FROM %s", nombreTabla);
 		try (Statement statement = con.createStatement(); ResultSet rs = statement.executeQuery(query)) {
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -80,6 +84,20 @@ public class ImprimeTablas {
 				}
 				System.out.println("|");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	}
+	
+	public void imprimeVehiculosPorCliente(Cliente c) {
+		selectFromTablaWhereCampoEqualsValor("vehiculo", "id_cliente", String.valueOf(c.getId()));		
+	}
+	
+	public void imprimeCitasPorCliente(Cliente c) {
+		selectFromTablaWhereCampoEqualsValor("citas", "id_cliente", String.valueOf(c.getId()));		
+	}
+	
+	public void imprimeDatosPorCliente(Cliente c) {
+		selectFromTablaWhereCampoEqualsValor("cliente", "id", String.valueOf(c.getId()));		
 	}
 }

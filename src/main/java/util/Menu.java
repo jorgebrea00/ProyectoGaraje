@@ -54,6 +54,12 @@ public class Menu {
 		}
 		return espacios.toString();
 	}
+	
+	public String exe(String o1) {
+		this.opciones.clear();
+		this.opciones.add(o1);
+		return this.imprimir();
+	}
 
 	public String exe(String o1, String o2) {
 		this.opciones.clear();

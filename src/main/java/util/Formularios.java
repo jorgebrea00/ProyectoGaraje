@@ -6,20 +6,18 @@ import model.Autenticacion;
 import model.Cliente;
 
 public class Formularios {
-	public static void registroCliente() {
-		// Crear Cliente
-		Cliente c = pedirDatosDeRegistro();
-		int idCliente = main.dao.getClientedao().insert(c);
-		// Crear datos de acceso
-		Autenticacion a = new Autenticacion(idCliente, c.getEmail());
-		a.setPassHash(pedirNuevaPass());
-		main.dao.getAutenticaciondao().insert(a);
+
+	public static void registroClienteYAutenticacion() {
+		Cliente cliente = solicitarDatosCreacionCliente();
+		String pass = solicitarNuevaPass();
+		Autenticacion auth = new Autenticacion(main.dao.getClientedao().insert(cliente), cliente.getEmail(), pass);
+		main.dao.getAutenticaciondao().insert(auth);
 		System.out.println();
 		System.out.println("¡Registro completado!");
 		System.out.println();
 	}
 
-	public static void ingresoCliente() {
+	public static boolean ingresoCliente() {
 		String correo = "";
 		String pass = "";
 		int intentos = 0;
@@ -40,11 +38,14 @@ public class Formularios {
 			}
 			if (intentos > 2) {
 				// login fallido, mandamos a menu principal
-				Vistas.menuInicial();
+				return false;
 			}
 		} while (!loginOk);
+		
+		
 		// Login Ok
-		Vistas.menuCliente();		
+		main.setClienteLogeado(main.dao.getClientedao().read(correo)); // Asignar cliente logeado
+		return true;
 	}
 
 	public static void salir() {
@@ -61,9 +62,9 @@ public class Formularios {
 		System.exit(0);
 	}
 
-	public static Cliente pedirDatosDeRegistro() {
+	public static Cliente solicitarDatosCreacionCliente() {
 		Cliente c = new Cliente();
-		System.out.println("Introduce tus datos de registro:");
+		System.out.println("Por favor, introduce tus datos:");
 		System.out.println();
 		System.out.println("Dni:");
 		c.setDni(main.getEscaner().nextLine());
@@ -79,7 +80,7 @@ public class Formularios {
 		return c;
 	}
 
-	public static String pedirNuevaPass() {
+	public static String solicitarNuevaPass() {
 		String p1 = "";
 		String p2 = "";
 		Autenticacion a = new Autenticacion();
@@ -99,8 +100,24 @@ public class Formularios {
 			if (!p1.equals(p2)) {
 				System.out.println("¡Las contraseñas no coinciden!");
 				System.out.println();
-			}		
+			}
 		} while (!p1.equals(p2));
 		return p1;
+	}
+
+	public static void actualizarDatosCliente() {
+		Cliente c = solicitarDatosCreacionCliente();
+		c.setId(main.getClienteLogeado().getId());
+		main.dao.getClientedao().update(c);
+		main.setClienteLogeado(c);
+	}
+
+	public static void registroVehiculo() {
+		System.out.println("PENDIENTE");
+		
+	}
+
+	public static void eliminarVehiculo() {
+		System.out.println("PENDIENTE");		
 	}
 }

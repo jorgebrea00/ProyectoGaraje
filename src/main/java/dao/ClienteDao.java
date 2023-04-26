@@ -152,4 +152,30 @@ public final class ClienteDao implements Dao<Cliente> {
 		return -1;
 	}
 
+	public Cliente read(String email) {
+		try {
+			String query = "SELECT * FROM cliente WHERE email = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, email);
+			ResultSet resultSet = statement.executeQuery();
+			Cliente cliente = null;
+
+			if (resultSet.next()) {
+				cliente = new Cliente();
+				cliente.setId(resultSet.getInt("id"));
+				cliente.setDni(resultSet.getString("dni"));
+				cliente.setEmail(resultSet.getString("email"));
+				cliente.setNombre(resultSet.getString("nombre"));
+				cliente.setApellido(resultSet.getString("apellido"));
+				cliente.setTelefono(resultSet.getInt("telefono"));
+			}
+			resultSet.close();
+			statement.close();
+			return cliente;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
