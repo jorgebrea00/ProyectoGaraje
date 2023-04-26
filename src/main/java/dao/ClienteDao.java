@@ -6,204 +6,150 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import estructuraBaseDeDatos.EstructuraBbdd;
-import estructuraBaseDeDatos.Tabla;
-import interfaces.Dao;
-import mensajes.Mensajes;
 import model.Cliente;
-import model.Login;
+import util.Multidao;
 
-public class ClienteDao extends DaoPrincipal implements Dao<Cliente>{
-	private String tabla="clientes";
+public final class ClienteDao implements Dao<Cliente> {
 
-	public ClienteDao(EstructuraBbdd estructuraTablas, Connection conexion) {
-		super(estructuraTablas, conexion);
-	}
-	
+	private Connection connection = Multidao.getCon();
+
 	@Override
 	public int insert(Cliente cliente) {
-		String ordenSql=ordenSqlInsert(tabla);      
-		
-		try (PreparedStatement ps = getConexionAbierta().prepareStatement(ordenSql, Statement.RETURN_GENERATED_KEYS)) {
-			ps.setNull(1, 0);										// id auto-generado
-			introduceEntityEnPs(2,cliente,ps).executeUpdate();
-			ResultSet claveGenerada=ps.getGeneratedKeys();
-			claveGenerada.next();									
-			return claveGenerada.getInt(1); // Devuelve la id auto-generada
-		}catch (Exception e){		
-			System.out.println(Mensajes.ERROR_GRABAR_REGISTRO + e.getMessage());
-			return 0;
+		try {
+			String query = "INSERT INTO cliente (dni, email, nombre, apellido, telefono) VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, cliente.getDni());
+			statement.setString(2, cliente.getEmail());
+			statement.setString(3, cliente.getNombre());
+			statement.setString(4, cliente.getApellido());
+			statement.setInt(5, cliente.getTelefono());
+
+			int rowsAffected = statement.executeUpdate();
+
+			if (rowsAffected == 0) {
+				throw new SQLException("La inserción del cliente ha fallado, no se han afectado filas.");
+			}
+
+			ResultSet generatedKeys = statement.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				cliente.setId(generatedKeys.getInt(1));
+			} else {
+				throw new SQLException("La inserción del cliente ha fallado, no se ha generado una clave primaria.");
+			}
+
+			statement.close();
+
+			return cliente.getId();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return -1;
 	}
-	
-	public PreparedStatement introduceEntityEnPs(int primerIndice, Cliente cliente, PreparedStatement ps) throws SQLException {
-				// Introduce los datos de la Entity en el PreparedStatement. Se utiliza primerIndice para empezar en el 2 en Insert y en el 1 en Update.
-		ps.setString(primerIndice,cliente.getDni());
-		ps.setString(primerIndice+1,cliente.getNombre());
-		ps.setString(primerIndice+2,cliente.getApellido1());
-		ps.setString(primerIndice+3,cliente.getApellido2());
-		ps.setInt(primerIndice+4,cliente.getTelefono());
-		ps.setString(primerIndice+5,cliente.getTipoVia());
-		ps.setString(primerIndice+6,cliente.getNombreVia());
-		ps.setInt(primerIndice+7,cliente.getNumeroVia());
-		ps.setInt(primerIndice+8,cliente.getPiso());
-		ps.setString(primerIndice+9,cliente.getPuerta());
-		ps.setInt(primerIndice+10,cliente.getCodigoPostal());
-		ps.setString(primerIndice+11,cliente.getProvincia());
-		ps.setInt(primerIndice+12,cliente.getLogin().getId());
-		return ps;
-	}
-	
+
 	@Override
-	public Cliente read  (int id) {
-		Cliente cliente=new Cliente();
-		String ordenSql="select * from "+tabla+ " where id= ?";
-		
-		try(PreparedStatement ps=getConexionAbierta().prepareStatement(ordenSql)){	
-			ps.setInt(1, id);
-			ps.executeQuery();
-			try (ResultSet rs=ps.getResultSet()){
-				rs.next();
-				cliente=cargaDatosEnEntity(rs);
-			}catch(SQLException e){
-				System.out.println("El id "+id+" no existe en la base de datos.");
-				cliente=null;
+	public Cliente read(int id) {
+		try {
+			String query = "SELECT * FROM cliente WHERE id = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			Cliente cliente = null;
+
+			if (resultSet.next()) {
+				cliente = new Cliente();
+				cliente.setId(resultSet.getInt("id"));
+				cliente.setDni(resultSet.getString("dni"));
+				cliente.setEmail(resultSet.getString("email"));
+				cliente.setNombre(resultSet.getString("nombre"));
+				cliente.setApellido(resultSet.getString("apellido"));
+				cliente.setTelefono(resultSet.getInt("telefono"));
 			}
-		}catch (Exception e1){	
-			System.out.println(Mensajes.ERRORDELECTURA+e1.getMessage());
-			cliente=null;
+
+			resultSet.close();
+			statement.close();
+
+			return cliente;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return  cliente;
+		return null;
 	}
-	
-	public Cliente cargaDatosEnEntity(ResultSet rs) throws SQLException {
-		Cliente cliente=new Cliente();
-		cliente.setId(rs.getInt(1));
-		cliente.setDni(rs.getString(2));
-		cliente.setNombre(rs.getString(3));
-		cliente.setApellido1(rs.getString(4));
-		cliente.setApellido2(rs.getString(5));
-		cliente.setTelefono(rs.getInt(6));
-		cliente.setTipoVia(rs.getString(7));
-		cliente.setNombreVia(rs.getString(8));
-		cliente.setNumeroVia(rs.getInt(9));
-		cliente.setPiso(rs.getInt(10));
-		cliente.setPuerta(rs.getString(11));
-		cliente.setCodigoPostal(rs.getInt(12));
-		cliente.setProvincia(rs.getString(13));
-		Login loginId=new Login();
-		loginId.setId(rs.getInt(14));
-		cliente.setLogin(loginId);
-		return cliente;
-	}
-	
-	public List<Cliente> read (String datoBuscado, String nombreCampo) {
-		List<Cliente> listaResultado=new ArrayList<>();
-		String ordenarPor1=nombreCampo;
-		String ordenSql="select * from "+tabla+ " where "+nombreCampo+"= ? order by "+ordenarPor1+" desc";
-		
-		try(PreparedStatement ps=getConexionAbierta().prepareStatement(ordenSql)){	
-			ps.setString(1, datoBuscado);
-			ps.executeQuery();
-			try (ResultSet rs=ps.getResultSet()){
-				while (rs.next()) {
-					Cliente cliente=new Cliente();
-					cliente=cargaDatosEnEntity(rs);
-					listaResultado.add(cliente);
-				}
-				return listaResultado;
-			}catch(SQLException e){
-				return  Collections.emptyList();
-			}
-		}catch (Exception e1){	
-			System.out.println(Mensajes.ERRORDELECTURA+e1.getMessage());
-			return  Collections.emptyList();
-		} 
-	}
-	
-	public List<Cliente> readIdLogin (int idLogin) {
-		List<Cliente> listaResultado=new ArrayList<>();
-		String nombreCampo="id_login";
-		String ordenarPor1="apellido1";
-		String ordenarPor2="apellido2";
-		String ordenarPor3="nombre";
-		String ordenSql="select * from "+tabla+ " where "+nombreCampo+"= ? order by "+ordenarPor1+","+ordenarPor2+","+ordenarPor3+" desc";
-		
-		try(PreparedStatement ps=getConexionAbierta().prepareStatement(ordenSql)){	
-			ps.setInt(1, idLogin);
-			ps.executeQuery();
-			try (ResultSet rs=ps.getResultSet()){
-				while (rs.next()) {
-					Cliente cliente=new Cliente();
-					cliente=cargaDatosEnEntity(rs);
-					listaResultado.add(cliente);
-				}
-				return listaResultado;
-			}catch(SQLException e){
-				return  Collections.emptyList();
-			}
-		}catch (Exception e1){	
-			System.out.println(Mensajes.ERRORDELECTURA+e1.getMessage());
-			return  Collections.emptyList();
-		} 
-	}
-	
+
 	@Override
 	public List<Cliente> getAll() {
-		List <Cliente> listaResultado=new ArrayList<>();
-		String ordenarPor1="apellido1";
-		String ordenarPor2="apellido2";
-		String ordenarPor3="nombre";
-		String ordenSql="select * from "+tabla+ " order by "+ordenarPor1+","+ordenarPor2+","+ordenarPor3+" desc";
-		
-		try(Statement stm=getConexionAbierta().createStatement();
-				ResultSet rs=stm.executeQuery(ordenSql)){	
-			while (rs.next()) {
-				Cliente cliente=new Cliente();
-				cliente=cargaDatosEnEntity(rs);
-				listaResultado.add(cliente);
+		try {
+			String query = "SELECT * FROM cliente";
+			PreparedStatement statement = connection.prepareStatement(query);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			List<Cliente> clientes = new ArrayList<>();
+
+			while (resultSet.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setId(resultSet.getInt("id"));
+				cliente.setDni(resultSet.getString("dni"));
+				cliente.setEmail(resultSet.getString("email"));
+				cliente.setNombre(resultSet.getString("nombre"));
+				cliente.setApellido(resultSet.getString("apellido"));
+				cliente.setTelefono(resultSet.getInt("telefono"));
+
+				clientes.add(cliente);
 			}
-			return listaResultado;
-		}catch (Exception e){		
-			System.out.println(Mensajes.ERRORDELECTURA + e.toString() );
-			return Collections.emptyList();
+
+			resultSet.close();
+			statement.close();
+
+			return clientes;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
 	public int update(Cliente cliente) {
-		Tabla tablaBuscada;
-		int numeroCamposEnTabla;
-		String ordenSql;
-		
-		ordenSql=ordenSqlUpdate(tabla);
-		tablaBuscada=getEstructuraTablas().buscaTabla(tabla);
-		numeroCamposEnTabla=tablaBuscada.getCampos().size();
-		try(PreparedStatement ps=getConexionAbierta().prepareStatement(ordenSql)){
-			ps.setInt(numeroCamposEnTabla, cliente.getId());
-			return introduceEntityEnPs(1, cliente, ps).executeUpdate();
-//			return ps.executeUpdate();
-		}catch (Exception e){		
-			System.out.println(Mensajes.ERROR_GRABAR_REGISTRO + e.getMessage() );
-			return 0;
+		try {
+			String query = "UPDATE cliente SET dni = ?, email = ?, nombre = ?, apellido = ?, telefono = ? WHERE id = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, cliente.getDni());
+			statement.setString(2, cliente.getEmail());
+			statement.setString(3, cliente.getNombre());
+			statement.setString(4, cliente.getApellido());
+			statement.setInt(5, cliente.getTelefono());
+			statement.setInt(6, cliente.getId());
+
+			int rowsAffected = statement.executeUpdate();
+
+			statement.close();
+
+			return rowsAffected;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return -1;
 	}
 
 	@Override
 	public int delete(Cliente cliente) {
-		String campoBusqueda="id";
-		String ordenSql="delete from "+tabla+" WHERE "+campoBusqueda+"=?";
-		
-		try(PreparedStatement ps=getConexionAbierta().prepareStatement(ordenSql)){
-			ps.setInt(1, cliente.getId());
-			return ps.executeUpdate();
-		}catch (Exception e){		
-			System.out.println(Mensajes.ERROR_BORRAR_REGISTRO + e.getMessage() );
-			return 0;
-		}		
+		try {
+			String query = "DELETE FROM cliente WHERE id = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, cliente.getId());
+
+			int rowsAffected = statement.executeUpdate();
+
+			statement.close();
+
+			return rowsAffected;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 }
