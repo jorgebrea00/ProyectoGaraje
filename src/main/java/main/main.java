@@ -49,4 +49,9 @@ public class main {
 		main.clienteLogeado = clienteLogeado;
 	}
 
+	public static void setSesion(Sesion sesion) {
+		main.sesion = sesion;
+	}
+
+	
 }

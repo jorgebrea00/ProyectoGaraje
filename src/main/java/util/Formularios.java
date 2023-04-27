@@ -1,15 +1,18 @@
 package util;
 
+import java.util.List;
+
 import main.Vistas;
 import main.main;
 import model.Autenticacion;
 import model.Cliente;
+import model.Vehiculo;
 
 public class Formularios {
 
-	public static void registroClienteYAutenticacion() {
-		Cliente cliente = solicitarDatosCreacionCliente();
-		String pass = solicitarNuevaPass();
+	public static void altaClienteYAutenticacion() {
+		Cliente cliente = altaCliente();
+		String pass = altaAutenticacion();
 		Autenticacion auth = new Autenticacion(main.dao.getClientedao().insert(cliente), cliente.getEmail(), pass);
 		main.dao.getAutenticaciondao().insert(auth);
 		System.out.println();
@@ -31,7 +34,7 @@ public class Formularios {
 			System.out.println();
 			System.out.println("Contraseña:");
 			pass = main.getEscaner().nextLine();
-			loginOk = main.dao.getAutenticaciondao().validarCredenciales(correo, pass); // validar credenciales
+			loginOk = main.getControlador().validarCredenciales(correo, pass); // validar credenciales
 			if (!loginOk) {
 				System.out.println("Usuario o contraseña no válido");
 				intentos++;
@@ -41,8 +44,7 @@ public class Formularios {
 				return false;
 			}
 		} while (!loginOk);
-		
-		
+
 		// Login Ok
 		main.setClienteLogeado(main.dao.getClientedao().read(correo)); // Asignar cliente logeado
 		return true;
@@ -62,7 +64,7 @@ public class Formularios {
 		System.exit(0);
 	}
 
-	public static Cliente solicitarDatosCreacionCliente() {
+	public static Cliente altaCliente() {
 		Cliente c = new Cliente();
 		System.out.println("Por favor, introduce tus datos:");
 		System.out.println();
@@ -80,7 +82,7 @@ public class Formularios {
 		return c;
 	}
 
-	public static String solicitarNuevaPass() {
+	public static String altaAutenticacion() {
 		String p1 = "";
 		String p2 = "";
 		Autenticacion a = new Autenticacion();
@@ -106,18 +108,47 @@ public class Formularios {
 	}
 
 	public static void actualizarDatosCliente() {
-		Cliente c = solicitarDatosCreacionCliente();
+		Cliente c = altaCliente();
 		c.setId(main.getClienteLogeado().getId());
 		main.dao.getClientedao().update(c);
 		main.setClienteLogeado(c);
 	}
 
-	public static void registroVehiculo() {
-		System.out.println("PENDIENTE");
-		
+	public static void altaVehiculo() {
+		Vehiculo v = new Vehiculo();
+		System.out.println("Introduce los datos del vehículo:");
+		System.out.println();
+		System.out.println("Matrícula:");
+		v.setMatricula(main.getEscaner().nextLine());
+		System.out.println("Tipo de vehículo:");
+		v.setTipoVehiculo(main.getEscaner().nextLine());
+		System.out.println("Marca:");
+		v.setMarca(main.getEscaner().nextLine());
+		System.out.println("Modelo:");
+		v.setModelo(main.getEscaner().nextLine());
+		System.out.println("Año:");
+		v.setAnio(main.getEscaner().nextInt());
+		main.getEscaner().nextLine(); // Consumir el carácter de nueva línea en el búfer del escáner
+		v.setIdCliente(main.getClienteLogeado().getId()); // asignar el id del cliente que recibimos como parámetro
+		main.dao.getVehiculodao().insert(v);
+		System.out.println("Vehiculo añadido correctamente.");
 	}
 
-	public static void eliminarVehiculo() {
-		System.out.println("PENDIENTE");		
+	public static void bajaVehiculo() {
+		List<Vehiculo> vehiculos = main.dao.getVehiculodao().getAll(main.getClienteLogeado().getId());
+		System.out.println("Introduce la matrícula del vehículo a dar de baja:");
+		String matricula = main.getEscaner().nextLine();
+		boolean vehiculoEncontrado = false;
+		for (Vehiculo vehiculo : vehiculos) {
+			if (vehiculo.getMatricula().equals(matricula)) {
+				main.dao.getVehiculodao().delete(vehiculo);				
+				System.out.println("Vehículo con matrícula " + matricula + " dado de baja correctamente");
+				vehiculoEncontrado = true;
+				break;
+			}
+		}
+		if (!vehiculoEncontrado) {
+			System.out.println("No se encontró ningún vehículo con matrícula " + matricula);
+		}
 	}
 }

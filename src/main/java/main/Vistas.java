@@ -20,7 +20,7 @@ public class Vistas {
 			}
 			break;
 		case "Registro":
-			Formularios.registroClienteYAutenticacion();
+			Formularios.altaClienteYAutenticacion();
 			break;
 		case "Volver":
 			Formularios.salir();
@@ -39,8 +39,9 @@ public class Vistas {
 		case "Mis vehiculos":
 			menuMisVehiculos();
 			break;
-		case "Volver":	
-			System.out.println("1");
+		case "Volver":
+			main.getControlador().imprimirMensajeFinSesion(); //Cerrar sesión
+			main.getControlador().cerrarSesion();
 			break;
 		}
 	}
@@ -51,8 +52,10 @@ public class Vistas {
 		switch (main.menu.setTitulo("Mis datos personales").exe("Editar")) {
 		case "Editar":
 			Formularios.actualizarDatosCliente();
+			menuCliente();	
 			break;
 		case "Volver":
+			menuCliente();	
 			break;
 		}
 	}
@@ -62,25 +65,31 @@ public class Vistas {
 		imprime.imprimeCitasPorCliente(main.getClienteLogeado());
 		switch (main.menu.setTitulo("Mis Citas").exe("Solicitar cita", "Cancelar cita")) {
 		case "Solicitar cita":
+			menuCliente();	
 			break;
 		case "Cancelar cita":
+			menuCliente();	
 			break;
 		case "Volver":
+			menuCliente();	
 			break;
 		}
 	}
 
 	private static void menuMisVehiculos() {
 		// imprimir vehiculos cliente
-		imprime.imprimeVehiculosPorCliente(main.getClienteLogeado());
+		imprime.imprimeVehiculosPorCliente(main.getClienteLogeado());		
 		switch (main.menu.setTitulo("Mis vehiculos").exe("Añadir", "Borrar")) {
 		case "Añadir":
-			Formularios.registroVehiculo();
+			Formularios.altaVehiculo();
+			menuCliente();			
 			break;
 		case "Borrar":
-			Formularios.eliminarVehiculo();
+			Formularios.bajaVehiculo();
+			menuCliente();
 			break;
 		case "Volver":
+			menuCliente();	
 			break;
 		}
 	}

@@ -11,6 +11,7 @@ public class Menu {
 	public static String titulo = "";
 
 	public String imprimir() {		
+		limpiar();
 		int espaciosTitulo = ANCHO_MENU - titulo.length();
 		System.out.println();
 		System.out.println(rellenarConCaracter(ANCHO_MENU, "*"));
@@ -53,6 +54,11 @@ public class Menu {
 			espacios.append(caracter);
 		}
 		return espacios.toString();
+	}
+	
+	public static void limpiar() {  
+	    System.out.print("\033[H\033[2J");  
+	    System.out.flush();  
 	}
 	
 	public String exe(String o1) {
