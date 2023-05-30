@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de nuevo cliente</title>
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Registro de nuevo cliente</h1>
+      <form method="post" action="../jsp/Signup.jsp">
+        <div class="form-group">
+          <label for="dni">DNI</label>
+          <input type="text" id="dni" name="dni" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electr&oacute;nico</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" name="apellido" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Tel&eacute;fono</label>
+          <input type="tel" id="telefono" name="telefono" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Contrase&ntilde;a</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirmar contrase&ntilde;a</label>
+          <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" formaction="../jsp/Signup.jsp?registrarse=true">Registrarse</button>
+        </div>
+      </form>
+      <div class="register">
+        <p>&#191;Ya tienes cuenta?</p>
+        <a href="../html/Login.html" class="button">Iniciar sesi&oacute;n</a>
+      </div>
+    </div>
+  </body>
+</html>
+

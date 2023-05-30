@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Mis Vehículos</title>
+</head>
+<body>
+
+
+<div id="tablaVehiculosContainer"></div>
+
+<script src="/Moto/js/generarTablaVehiculos.js"></script>
+<script> 
+var vehiculos = [
+	  // Aquí debes proporcionar los objetos Vehiculo correspondientes
+	  // con sus respectivos atributos (matricula, tipoVehiculo, marca, modelo, anio)
+	];
+
+	var tablaVehiculos = generarTablaVehiculos(vehiculos);
+	document.getElementById('tablaVehiculosContainer').appendChild(tablaVehiculos);
+</script>
+
+
+</body>
+</html>

@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="util/Validacion2.java" kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/javax.persistence_2.2.1.v201807122140.jar">
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
 		<attributes>
-			<attribute name="module" value="true"/>
+			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/javax.persistence-api-2.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/mysql-connector-j-8.0.31.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE2/Lib/javax.persistence_2.2.1.v201807122140.jar"/>
-	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE2/Lib/javax.persistence-api-2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE2/Lib/mysql-connector-j-8.0.31.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/Lib/commons-dbcp2-2.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/Lib/commons-dbutils-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/Lib/commons-pool2-2.11.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/Lib/javax.persistence_2.2.1.v201807122140.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/Lib/javax.persistence-api-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elwya/Desktop/Formacion/EEE3/Lib/mysql-connector-j-8.0.31.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
